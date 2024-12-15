@@ -1,0 +1,85 @@
+<navigation-bar title="新增物品" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+
+<scroll-view class="flex-1 overflow-y-hidden mt-[32rpx] px-[24rpx]" scroll-y type="list">
+  <view class="bg-[#f6f6f6] rounded-[24rpx]">
+    <view class="px-[24rpx] pt-[24rpx] pb-[48rpx]">
+      <view class="text-[36rpx] mb-[16rpx]">物品名称</view>
+      <input
+        class="h-[80rpx] leading-[80rpx]
+        border-t-transparent border-x-transparent border-b-[1rpx] border-[#dedede] border-solid"
+        placeholder-style="color: #999; font-size:32rpx"
+        value="{{name}}"
+        bindinput="nameInput"
+        placeholder="请输入物品名称" />
+
+      <view class="text-[36rpx] mb-[16rpx] mt-[48rpx]">生产日期</view>
+      <picker
+        class="h-[80rpx] leading-[80rpx] text-[32rpx]
+        border-t-transparent border-x-transparent border-b-[1rpx] border-[#dedede] border-solid
+        {{ factoryDate ? 'text-[#222]' : 'text-[#999]' }}"
+        mode="date"
+        value="{{factoryDate}}"
+        start="2010-01-01"
+        end="{{todayDate}}"
+        bindchange="bindDateChange"
+      >
+        <view>{{factoryDate || '请选择生产日期'}}</view>
+      </picker>
+
+      <view class="text-[36rpx] mb-[16rpx] mt-[48rpx]">保质期</view>
+      <view class="flex">
+        <input
+          class="w-[350rpx] h-[80rpx] leading-[80rpx] shrink-0
+          border-t-transparent border-x-transparent border-b-[1rpx] border-[#dedede] border-solid"
+          placeholder-style="color: #999; font-size:32rpx"
+          value="{{ shelfLife }}"
+          bindinput="shelfLifeInput"
+          type="number"
+          placeholder="请输入物品保质期" />
+        
+        <view class="relative flex flex-1 overflow-hidden rounded-full border-[1rpx] border-[#dedede] border-solid">
+          <button
+            class="relative z-10 bg-transparent m-0 p-0 leading-[80rpx] !w-auto !flex-1"
+            data-type="{{ 1 }}"
+            bindtap="changeType"
+          >天</button>
+          <button
+            class="relative z-10 bg-transparent m-0 p-0 leading-[80rpx] !w-auto !flex-1"
+            data-type="{{ 2 }}"
+            bindtap="changeType"
+          >月</button>
+
+          <view
+            class="absolute w-1/2 h-full rounded-full bg-blue-200 transition-all
+            {{ shelfLifeType === 1 ? 'left-0' : 'left-[152rpx]' }}"></view>
+        </view>
+      </view>
+      
+      <view class="flex items-center w-full mt-[24rpx]">
+        <button
+          wx:for="{{suggestions}}"
+          wx:key="item"
+          class="!w-[128rpx] h-[48rpx] leading-[48rpx] p-0 !ml-0 !mr-[24rpx]
+          text-[26rpx] font-light rounded-[6rpx] bg-[#dedede]"
+          data-number="{{item}}"
+          bindtap="chooseSuggest"
+        >{{item}}个月</button>
+      </view>
+
+      <view class="text-[36rpx] mb-[16rpx] mt-[48rpx]">备注</view>
+      <input
+        class="h-[80rpx] leading-[80rpx]
+        border-t-transparent border-x-transparent border-b-[1rpx] border-[#dedede] border-solid"
+        placeholder-style="color: #999; font-size:32rpx"
+        value="{{remark}}"
+        bindinput="remarkInput"
+        placeholder="请输入备注信息（选填）" />
+    </view>
+  </view>
+</scroll-view>
+
+<button
+  class="fixed bottom-[128rpx] left-[50rpx] !w-[650rpx] p-0 h-[88rpx] leading-[88rpx]
+  rounded-[44rpx] bg-green-500 text-white"
+  bindtap="saveItem"
+>保存</button>

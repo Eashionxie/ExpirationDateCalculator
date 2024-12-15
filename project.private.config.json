@@ -3,5 +3,18 @@
   "projectname": "ExpirationDateCalculator",
   "setting": {
     "compileHotReLoad": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "新增",
+          "pathName": "pages/create/create",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }

@@ -1,7 +1,50 @@
-<!--index.wxml-->
-<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
+<!-- index.wxml -->
+<navigation-bar title="保质期助手" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<view class="flex items-center justify-center h-[188rpx] mx-[24rpx] mt-[24rpx] bg-[#f6f6f6] rounded-[12rpx]">
+  <view class="flex flex-1 items-center justify-center flex-col h-[140rpx] border-r-[1rpx] border-[#e8e8e8]">
+    <view class="w-[48rpx] h-[48rpx] rounded-full mb-[16rpx] bg-green-400"></view>
+    <text class="">正常({{ normalCount }})</text>
+  </view>
+  <view class="flex flex-1 items-center justify-center flex-col h-[140rpx] border-r-[1rpx] border-[#e8e8e8]">
+    <view class="w-[48rpx] h-[48rpx] rounded-full mb-[16rpx] bg-yellow-400"></view>
+    <text class="">临期({{ warningCount }})</text>
+  </view>
+  <view class="flex flex-1 items-center justify-center flex-col h-full">
+    <view class="w-[48rpx] h-[48rpx] rounded-full mb-[16rpx] bg-red-400"></view>
+    <text class="">过期({{ expiredCount }})</text>
+  </view>
+</view>
+<scroll-view class="scrollarea mt-[32rpx] px-[24rpx]" scroll-y type="list">
+  <view wx:if="{{itemList.length}}" class="grid grid-cols-2 gap-[24rpx]">
+    <view
+      wx:for="{{itemList}}"
+      wx:key="name"
+      data-name="{{ item.name }}"
+      bindtap="toDetail"
+      class="h-[220rpx] flex flex-col justify-center px-[38rpx]
+      rounded-ss-[38rpx] rounded-se-[12rpx] rounded-es-[12rpx] rounded-ee-[38rpx]
+      {{item.left_days < 0 ? 'bg-red-300' : item.left_days < 6 ? 'bg-yellow-300' : 'bg-green-300'}}"
+    >
+      <text class="text-[40rpx] truncate">{{ item.name }}</text>
+      <text wx:if="{{item.left_days === 0}}" class="text-[#333] mt-[20rpx]">今天过期</text>
+      <text wx:else class="text-[#333] mt-[20rpx]">剩余：{{item.left_days}}天</text>
+    </view>
+  </view>
+  <view wx:else class="flex flex-col items-center justify-center h-[80%]">
+    <text class="text-[#999] text-[28rpx] mb-[12rpx]">暂无物品</text>
+    <text class="text-[#999] text-[28rpx]">点击下面的“+”添加物品吧</text>
+  </view>
+  <view wx:if="{{itemList.length > 10}}" class="text-center text-[24rpx] text-[#999] mt-[48rpx]">没有更多了</view>
+  <view wx:if="{{itemList.length}}" class="pb-[108rpx]"></view>
+
+  <button class="fixed right-[16rpx] bottom-[128rpx] !w-[128rpx] h-[128rpx]
+    flex items-center justify-center
+    rounded-full bg-green-500"
+    bindtap="navigateToCreate"
+  >
+    <text class="relative top-[-8rpx] font-light text-[88rpx] text-white">+</text>
+  </button>
+  <!-- <view class="container">
     <view class="userinfo">
       <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
         <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
@@ -24,5 +67,5 @@
     <view class="usermotto">
       <text class="user-motto">{{motto}}</text>
     </view>
-  </view>
+  </view> -->
 </scroll-view>

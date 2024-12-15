@@ -21,5 +21,8 @@
     "typescript": "latest",
     "weapp-tailwindcss": "^3.7.0",
     "weapp-vite": "latest"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
   }
 }
