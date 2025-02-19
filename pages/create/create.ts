@@ -52,7 +52,7 @@ Page({
     if (!this.data.factoryDate) return wx.showToast({ title: '请选择生产日期', duration: 2000, icon: 'none' })
     if (!this.data.shelfLife) return wx.showToast({ title: '请输入保质期', duration: 2000, icon: 'none' })
     const shelf_life_time = this.data.shelfLife * 24*3600000 * (this.data.shelfLifeType === 2 ? 30 : 1)
-    const expire_time = new Date(this.data.factoryDate).getTime() + shelf_life_time
+    const expire_time = dayjs(this.data.factoryDate).valueOf() + shelf_life_time
     const item = {
       name: this.data.name,
       factory_date: this.data.factoryDate,

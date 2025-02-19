@@ -215,7 +215,7 @@ declare namespace WechatMiniprogram {
         /** 手机号 */
         mobilePhoneNumber?: string
         /** 昵称 */
-        nickName?: string
+        nickname?: string
         /** 公司 */
         organization?: string
         /** 头像本地文件路径 */
@@ -12547,7 +12547,7 @@ session.run({
          * - 'zh_TW': 繁体中文; */
         language: 'en' | 'zh_CN' | 'zh_TW'
         /** 用户昵称 */
-        nickName: string
+        nickname: string
         /** 用户所在省份。不再返回，参考 [相关公告](https://developers.weixin.qq.com/community/develop/doc/00028edbe3c58081e7cc834705b801) */
         province: string
     }
@@ -24138,7 +24138,7 @@ wx.getSystemInfoAsync({
 wx.getUserInfo({
   success: function(res) {
     var userInfo = res.userInfo
-    var nickName = userInfo.nickName
+    var nickname = userInfo.nickname
     var avatarUrl = userInfo.avatarUrl
     var gender = userInfo.gender //性别 0：未知、1：男、2：女
     var province = userInfo.province
@@ -24156,7 +24156,7 @@ wx.getUserInfo({
 * ```json
 {
   "openId": "OPENID",
-  "nickName": "NICKNAME",
+  "nickname": "NICKNAME",
   "gender": GENDER,
   "city": "CITY",
   "province": "PROVINCE",
@@ -24239,7 +24239,7 @@ Page({
 *     </block>
 *     <block wx:else>
 *       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-*       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+*       <text class="userinfo-nickname">{{userInfo.nickname}}</text>
 *     </block>
 *   </view>
 * </view>

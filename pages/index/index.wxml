@@ -27,6 +27,7 @@
     >
       <text class="text-[40rpx] truncate">{{ item.name }}</text>
       <text wx:if="{{item.left_days === 0}}" class="text-[#333] mt-[20rpx]">今天过期</text>
+      <text wx:elif="{{item.left_days < 0}}" class="text-[#333] mt-[20rpx]">已过期：{{0 - item.left_days}}天</text>
       <text wx:else class="text-[#333] mt-[20rpx]">剩余：{{item.left_days}}天</text>
     </view>
   </view>
@@ -44,28 +45,10 @@
   >
     <text class="relative top-[-8rpx] font-light text-[88rpx] text-white">+</text>
   </button>
-  <!-- <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
-    </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
-    </view>
-  </view> -->
 </scroll-view>
+
+<login-dialog
+	wx:if="{{ showLoginDialog }}"
+	bind:closeLogin="onCloseLogin"
+	bind:successLogin="onSuccessLogin"
+></login-dialog>

@@ -1,0 +1,26 @@
+/**index.scss**/
+.bg-in-anima {
+    animation: bgIn .3s linear;
+}
+
+.content-in-anima {
+    animation: contentIn .3s ease-in;
+}
+
+@keyframes bgIn {
+    0% {
+        background-color: #00000000;
+    }
+    100% {
+        background-color: #00000080;
+    }
+}
+
+@keyframes contentIn {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

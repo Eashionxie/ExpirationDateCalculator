@@ -7,6 +7,7 @@ const app = getApp<IAppOption>()
 
 Page({
   data: {
+    showLoginDialog: false,
     itemList: [] as ItemData[],
     expiredCount: 0,
     warningCount: 0,
@@ -17,9 +18,9 @@ Page({
   },
   initPageData() {
     if (app.globalData.itemList.length) {
-      const curDateTime = new Date().getTime()
+      const curDateTime = Date.now()
       const expiredCount = app.globalData.itemList.filter((v: any) => v.expire_time - curDateTime <= 0).length
-      const warningCount = app.globalData.itemList.filter((v: any) => v.expire_time - curDateTime <= 5*24*3600000).length
+      const warningCount = app.globalData.itemList.filter((v: any) => v.expire_time - curDateTime > 0 && v.expire_time - curDateTime <= 5*24*3600000).length
       const list = app.globalData.itemList.map((v: ItemData) => {
         const timestamp = v.expire_time - Date.now()
         let left_days = Math.floor(timestamp / (24*3600000))
@@ -34,6 +35,12 @@ Page({
     }
   },
   navigateToCreate() {
+    // if (!wx.getStorageSync('openid')) {
+    //   this.setData({
+    //       showLoginDialog: true
+    //   })
+    //   return
+    // }
     wx.navigateTo({
       url: '../create/create'
     })
@@ -42,29 +49,19 @@ Page({
     wx.navigateTo({
       url: '../detail/detail?name='+e.currentTarget.dataset.name
     })
-  }
-  // 事件处理函数
-  // bindViewTap() {
-  //   wx.navigateTo({
-  //     url: '../logs/logs',
-  //   })
-  // },
-  // onChooseAvatar(e: any) {
-  //   const { avatarUrl } = e.detail
-  //   const { nickName } = this.data.userInfo
-  //   this.setData({
-  //     "userInfo.avatarUrl": avatarUrl,
-  //     hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-  //   })
-  // },
-  // onInputChange(e: any) {
-  //   const nickName = e.detail.value
-  //   const { avatarUrl } = this.data.userInfo
-  //   this.setData({
-  //     "userInfo.nickName": nickName,
-  //     hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-  //   })
-  // },
+  },
+
+  onCloseLogin() {
+    this.setData({
+        showLoginDialog: false
+    })
+},
+
+async onSuccessLogin() {
+    this.setData({
+        showLoginDialog: false
+    })
+},
   // getUserProfile() {
   //   // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
   //   wx.getUserProfile({
