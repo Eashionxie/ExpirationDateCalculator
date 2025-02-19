@@ -60,6 +60,9 @@ Page({
       remark: this.data.remark,
       expire_time
     }
+    // todo 新增/修改接口
+
+    
     const newList = [...getApp().globalData.itemList, item];
     wx.setStorageSync('itemListInfo', {
       listData: newList,

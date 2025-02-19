@@ -28,6 +28,8 @@ Page({
         content: `确认删除 ${this.data.itemInfo.name} 吗？`,
         success: (res) => {
           if (res.confirm) {
+            // todo 删除接口
+            
             const newList = getApp().globalData.itemList.filter((v: ItemData) => v.name !== this.data.itemInfo.name)
             wx.setStorageSync('itemListInfo', {
               listData: newList,

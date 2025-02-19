@@ -35,6 +35,7 @@ Page({
     }
   },
   navigateToCreate() {
+    // todo 登录逻辑
     // if (!wx.getStorageSync('openid')) {
     //   this.setData({
     //       showLoginDialog: true

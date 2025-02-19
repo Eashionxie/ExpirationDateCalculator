@@ -7,24 +7,13 @@ App<IAppOption>({
     itemList: []
   },
   onLaunch() {
-    // 展示本地存储能力
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
+    // todo 获取服务端数据
+    
     // 获取本地数据
     const localItemsData = wx.getStorageSync('itemListInfo')
     if (localItemsData && localItemsData.listData && localItemsData.listData.length) {
       this.globalData.itemList = localItemsData.listData
       this.globalData.updateTime = localItemsData.updateTime
     }
-
-    // 登录
-    wx.login({
-      success: res => {
-        console.log(res.code)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      },
-    })
   },
 })
